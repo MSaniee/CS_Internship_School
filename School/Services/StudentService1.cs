@@ -1,4 +1,5 @@
 ﻿using School.Domain;
+using School.Domain.UserAggregate;
 using System;
 using System.Collections.Generic;
 using System.Linq;
