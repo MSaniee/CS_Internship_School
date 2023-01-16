@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace School.Infrastructure.Repositories
 {
-    public class StudentRepository : Repository<Student>, IStudentRepository
+    public class StudentRepository : Repository<Student>, IStudentRepository, IDisposable
     {
 
         public StudentRepository(List<Student> db) : base(db)
@@ -18,6 +18,11 @@ namespace School.Infrastructure.Repositories
         public override void Add(Student entity)
         {
             entity.Name += "Test";
+        }
+
+        public void Dispose()
+        {
+            //Close Connection
         }
     }
 }

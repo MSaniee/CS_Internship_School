@@ -1,13 +1,49 @@
-﻿using School.Domain;
-using School.Domain.UserAggregate;
-using School.Infrastructure;
+﻿using School.Domain.UserAggregate;
 using School.Infrastructure.Repositories;
-using School.Services;
+
+//Forcing Garbage Collection In C#
+CreateUsers();
+Console.WriteLine("Memory used before: {0:N0}", GC.GetTotalMemory(false));
+GC.Collect();
+Console.WriteLine("Memory used after: {0:N0}", GC.GetTotalMemory(true));
+
+
+void CreateUsers(int number = 100)
+{
+    Student student;
+    for (int i = 0; i < 100; i++)
+    {
+        student = new Student();
+    }
+}
+
+
+//IDisposable Interface in C#
 
 List<Student> db = new();
-IStudentRepository studentRepository = new StudentRepository(db);
+//var studentRepo = new StudentRepository(db);
 
+using var studentRepo = new StudentRepository(db);
+//or
+studentRepo.Dispose();
 Console.WriteLine("Hello, World!");
+
+
+//Garbage Collection Example
+//Console.WriteLine("GC Maximum Generations:" + GC.MaxGeneration);
+//Console.WriteLine("Total Memory:" + GC.GetTotalMemory(false));
+//Student student1 = new();
+//Console.WriteLine("myObject Generation is :" + GC.GetGeneration(student1));
+
+
+
+
+
+
+
+//List<Student> db = new();
+//IStudentRepository studentRepository = new StudentRepository(db);
+
 
 //Teacher teacher1 = new(1, "Mohsen", "Saniee");
 //Teacher teacher2 = new(2, "Reza", "Rezaee");

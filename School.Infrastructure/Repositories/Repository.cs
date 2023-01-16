@@ -16,6 +16,7 @@ namespace School.Infrastructure.Repositories
         {
             _db = db;
         }
+
         public virtual void Add(TEntity entity)
         {
             _db.Add(entity);
