@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace School.Services
 {
-    public class StudentService2 : IStudentService
-    {
-        public void MoveToHome(Student student)
-        {
-            Console.WriteLine("line 2");
-        }
-    }
+    //public class StudentService2 : IStudentService
+    //{
+    //    public void MoveToHome(Student student)
+    //    {
+    //        Console.WriteLine("line 2");
+    //    }
+    //}
 }
