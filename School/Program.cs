@@ -1,32 +1,64 @@
-﻿using School.Domain.UserAggregate;
+﻿using School.Application;
+using School.Application.Interfaces;
+using School.Application.Services;
+using School.Domain.UserAggregate;
 using School.Infrastructure.Repositories;
 
-//Forcing Garbage Collection In C#
-CreateUsers();
-Console.WriteLine("Memory used before: {0:N0}", GC.GetTotalMemory(false));
-GC.Collect();
-Console.WriteLine("Memory used after: {0:N0}", GC.GetTotalMemory(true));
 
+List<Student> db = new();
 
-void CreateUsers(int number = 100)
+IStudentRepository studentRepo = new StudentRepository(db);
+IStudentService studentService = new StudentService(studentRepo);
+
+try
 {
-    Student student;
-    for (int i = 0; i < 100; i++)
-    {
-        student = new Student();
-    }
+    Student student = studentService.GetById(10);
 }
+catch(ArgumentNullException ex)
+{
+
+}
+catch(NotFoundException ex) when (ex.Status == "Green")
+{
+    Console.WriteLine("Id : " + ex.StudentId + " " + ex.Message);
+}
+catch(Exception ex)
+{
+    Console.WriteLine("Exception Is Handeled");
+}
+finally
+{
+    Console.WriteLine("Finally Block...");
+}
+
+
+Console.WriteLine();
+//Forcing Garbage Collection In C#
+//CreateUsers();
+//Console.WriteLine("Memory used before: {0:N0}", GC.GetTotalMemory(false));
+//GC.Collect();
+//Console.WriteLine("Memory used after: {0:N0}", GC.GetTotalMemory(true));
+
+
+//void CreateUsers(int number = 100)
+//{
+//    Student student;
+//    for (int i = 0; i < 100; i++)
+//    {
+//        student = new Student();
+//    }
+//}
 
 
 //IDisposable Interface in C#
 
-List<Student> db = new();
-//var studentRepo = new StudentRepository(db);
+//List<Student> db = new();
+////var studentRepo = new StudentRepository(db);
 
-using var studentRepo = new StudentRepository(db);
-//or
-studentRepo.Dispose();
-Console.WriteLine("Hello, World!");
+//using var studentRepo = new StudentRepository(db);
+////or
+//studentRepo.Dispose();
+//Console.WriteLine("Hello, World!");
 
 
 //Garbage Collection Example
