@@ -24,5 +24,10 @@ namespace School.Infrastructure.Repositories
         {
             //Close Connection
         }
+
+        public Student GetById(int id)
+        {
+            return _db.FirstOrDefault(s => s.Id == id);
+        }
     }
 }

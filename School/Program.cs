@@ -1,8 +1,28 @@
-﻿using School.Domain.UserAggregate;
+﻿using School.Application;
+using School.Application.Interfaces;
+using School.Application.Services;
+using School.Domain.UserAggregate;
 using School.Infrastructure.Repositories;
 
 
 List<Student> db = new();
+
+IStudentRepository studentRepo = new StudentRepository(db);
+IStudentService studentService = new StudentService(studentRepo);
+
+try
+{
+    Student student = studentService.GetById(10);
+}
+catch(NotFoundException ex) when (ex.Status == "Green")
+{
+    Console.WriteLine($"Stuednet Id : {ex.StudentId} {ex.Message}");
+}
+catch (Exception ex)
+{
+    Console.Write("Exception Is Handled...");
+}
+
 
 Console.WriteLine("Finish...");
 

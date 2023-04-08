@@ -8,5 +8,6 @@ namespace School.Domain.UserAggregate
 {
     public interface IStudentRepository : IRepository<Student>
     {
+        Student GetById(int Id);
     }
 }

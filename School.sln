@@ -7,9 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "School", "School\School.csp
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{64495BE5-3273-40CE-8AC2-FEBC1A071EA2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "School.Domain", "School.Domain\School.Domain.csproj", "{EBD71E72-2B57-4269-9CC8-7F28C163E9FD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "School.Domain", "School.Domain\School.Domain.csproj", "{EBD71E72-2B57-4269-9CC8-7F28C163E9FD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "School.Infrastructure", "School.Infrastructure\School.Infrastructure.csproj", "{8BBDEB3B-1188-49C5-8E1E-7A61B9B2A9B2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "School.Infrastructure", "School.Infrastructure\School.Infrastructure.csproj", "{8BBDEB3B-1188-49C5-8E1E-7A61B9B2A9B2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "School.Application", "School.Application\School.Application.csproj", "{219BCBAE-1DFA-402B-AACC-8BBFD42D974D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,6 +31,10 @@ Global
 		{8BBDEB3B-1188-49C5-8E1E-7A61B9B2A9B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8BBDEB3B-1188-49C5-8E1E-7A61B9B2A9B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8BBDEB3B-1188-49C5-8E1E-7A61B9B2A9B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{219BCBAE-1DFA-402B-AACC-8BBFD42D974D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{219BCBAE-1DFA-402B-AACC-8BBFD42D974D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{219BCBAE-1DFA-402B-AACC-8BBFD42D974D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{219BCBAE-1DFA-402B-AACC-8BBFD42D974D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -36,6 +42,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{EBD71E72-2B57-4269-9CC8-7F28C163E9FD} = {64495BE5-3273-40CE-8AC2-FEBC1A071EA2}
 		{8BBDEB3B-1188-49C5-8E1E-7A61B9B2A9B2} = {64495BE5-3273-40CE-8AC2-FEBC1A071EA2}
+		{219BCBAE-1DFA-402B-AACC-8BBFD42D974D} = {64495BE5-3273-40CE-8AC2-FEBC1A071EA2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {81B9B57D-A5C6-47E5-BF3F-F5B53174CC59}
