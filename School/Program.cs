@@ -4,11 +4,24 @@ using School.Application.Services;
 using School.Domain.UserAggregate;
 using School.Infrastructure.Repositories;
 
+MyPredicate<Student> delegate1;
+
+delegate1 = CheckStudent;
+delegate1 = s => true;
 
 List<Student> db = new();
 
 IStudentRepository studentRepo = new StudentRepository(db);
 IStudentService studentService = new StudentService(studentRepo);
+
+studentService.OnRegistered += SendEmail;
+
+studentService.Register("Mohsen");
+studentService.Register("Meysam");
+var students = studentRepo.GetAllStudents();
+
+studentService.Register("Mahdi");
+
 
 try
 {
@@ -25,6 +38,18 @@ catch (Exception ex)
 
 
 Console.WriteLine("Finish...");
+
+
+bool CheckStudent(Student student)
+{
+    return true;
+}
+
+void SendEmail()
+{
+    Console.WriteLine("Send Email");
+}
+
 
 //Forcing Garbage Collection In C#
 //CreateUsers();
