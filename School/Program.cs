@@ -9,6 +9,11 @@ MyPredicate<Student> delegate1;
 delegate1 = CheckStudent;
 delegate1 = s => true;
 
+MyFilter<Student> delegate2;
+
+delegate2 = CheckStudent;
+delegate2 = s => true;
+
 List<Student> db = new();
 
 IStudentRepository studentRepo = new StudentRepository(db);
@@ -20,7 +25,7 @@ studentService.Register("Mohsen");
 studentService.Register("Meysam");
 var students = studentRepo.GetAllStudents();
 
-studentService.Register("Mahdi");
+studentService.Register("Mohsen");
 
 
 try

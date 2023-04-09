@@ -27,7 +27,7 @@ namespace School.Infrastructure.Repositories
 
         public bool ExistsStudent(string name)
         {
-            var result = _db.MyWhere(s => s.Name == name);
+            var result = _db.MyFilter(s => s.Name == name);
 
             return result.Count != 0;
         }
@@ -71,4 +71,25 @@ namespace School.Infrastructure.Repositories
     }
 
     public delegate bool MyPredicate<T>(T t);
+
+
+    public delegate bool MyFilter<T>(T t);
+
+    public static class MyFilterExtension
+    {
+        public static List<T> MyFilter<T>(this List<T> list, MyFilter<T> myFilter)
+        {
+            List<T> result = new();
+
+            foreach (var item in list)
+            {
+                if (myFilter.Invoke(item))
+                {
+                    result.Add(item);
+                }
+            }
+
+            return result;
+        }
+    }
 }
