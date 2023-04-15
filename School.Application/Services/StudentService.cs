@@ -12,6 +12,10 @@ namespace School.Application.Services
     {
         private readonly IStudentRepository _studentRepo;
 
+        public delegate void StudentEventHandler();
+
+        public event StudentEventHandler OnRegistered;
+
         public StudentService(IStudentRepository studentRepo)
         {
             _studentRepo = studentRepo ?? throw new ArgumentNullException();
@@ -24,6 +28,19 @@ namespace School.Application.Services
             if (student is null) throw new NotFoundException(id, "Red", "Student Not Found");
 
             return student;
+        }
+
+        public Student Register(string name)
+        {
+            if (_studentRepo.ExistsStudent(name)) throw new Exception("student is already registerd");
+
+            Student newStudent = new() { Id = 12, Name = name };
+
+            _studentRepo.Add(newStudent);
+
+            OnRegistered.Invoke();
+
+            return newStudent;
         }
     }
 }

@@ -5,10 +5,20 @@ using School.Domain.UserAggregate;
 using School.Infrastructure.Repositories;
 
 
+MyPredicate <Student> delegate1 = CheckStudent;
+MyPredicate<Student> delegate2 = s => true;
+
+
 List<Student> db = new();
 
 IStudentRepository studentRepo = new StudentRepository(db);
 IStudentService studentService = new StudentService(studentRepo);
+
+studentService.OnRegistered += SendSms;
+var student1 = studentService.Register("Mohsen");
+
+
+var result = studentRepo.GetAllStudents();
 
 try
 {
@@ -25,6 +35,16 @@ catch (Exception ex)
 
 
 Console.WriteLine("Finish...");
+
+bool CheckStudent(Student student)
+{
+    return true;
+}
+
+void SendSms()
+{
+    Console.WriteLine("Send sms");
+}
 
 //Forcing Garbage Collection In C#
 //CreateUsers();
