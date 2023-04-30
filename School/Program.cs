@@ -1,4 +1,5 @@
-﻿using School.Application;
+﻿using School;
+using School.Application;
 using School.Application.Interfaces;
 using School.Application.Services;
 using School.Domain.UserAggregate;
@@ -11,12 +12,20 @@ MyPredicate<Student> delegate2 = s => true;
 
 List<Student> db = new();
 
+db = SeedData.GetSeedData();
+
 IStudentRepository studentRepo = new StudentRepository(db);
 IStudentService studentService = new StudentService(studentRepo);
 
-studentService.OnRegistered += SendSms;
-var student1 = studentService.Register("Mohsen");
+//studentService.OnRegistered += SendSms;
+//var student1 = studentService.Register("Mohsen");
 
+
+bool isAllStudentsPassedFinalExam = studentRepo.IsAllStudentsPassedFinalExam();
+int countStudentsPassedFinalExam = studentRepo.CountStudentsPassedFinalExam();
+List<Student> student1 = studentRepo.GetOneStudentPassed();
+bool existsMohsen = studentRepo.ExistsStudent("Mohsen");
+bool existsMilad = studentRepo.ExistsStudent("Milad");
 
 var result = studentRepo.GetAllStudents();
 

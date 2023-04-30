@@ -21,16 +21,46 @@ namespace School.Infrastructure.Repositories
         //    entity.Name += "Test";
         //}
 
+        public bool IsAllStudentsPassedFinalExam()
+        {
+            return _db.All(s => s.FinalExam == true);
+        }
+
+        public int CountStudentsPassedFinalExam()
+        {
+            return _db.Where(s => s.FinalExam == true).Count();
+        }
+
+        public List<Student> GetOneStudentPassed()
+        {
+             return _db.DistinctBy(s => s.FinalExam).ToList();
+        }
+
+        //public List<Student> GetOneStudentPassed()
+        //{
+        //     _db.(s => s.FinalExam).ToList();
+        //}
+
+        //public List<Student> GetGraduatedStudent()
+        //{
+        //    _db.
+        //}
+
         public void Dispose()
         {
             //Close Connection
         }
 
+        //public bool ExistsStudent(string name)
+        //{
+        //    var result = _db.MyWhere(s => s.Name == name);
+
+        //    return result.Count != 0;
+        //}
+
         public bool ExistsStudent(string name)
         {
-            var result = _db.MyWhere(s => s.Name == name);
-
-            return result.Count != 0;
+            return _db.Any(s => s.Name == name);
         }
 
         public bool ExistsStudent(int id)
