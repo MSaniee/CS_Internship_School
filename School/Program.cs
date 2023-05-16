@@ -1,24 +1,31 @@
-﻿using School.Application;
+﻿using School;
+using School.Application;
 using School.Application.Interfaces;
 using School.Application.Services;
 using School.Domain.UserAggregate;
 using School.Infrastructure.Repositories;
 
 
-MyPredicate <Student> delegate1 = CheckStudent;
-MyPredicate<Student> delegate2 = s => true;
-
-
 List<Student> db = new();
+
+db = SeedData.GetSeedData();
 
 IStudentRepository studentRepo = new StudentRepository(db);
 IStudentService studentService = new StudentService(studentRepo);
 
-studentService.OnRegistered += SendSms;
-var student1 = studentService.Register("Mohsen");
 
+bool boolTest1 = studentRepo.IsAllStudentsPassedFinalExam();
+
+bool boolTest2 = studentRepo.ExistsStudent(6);
+
+int count1 = studentRepo.CountStudentsPassedFinalExam();
+
+Student bestStudent = studentRepo.GetBestStudent();
 
 var result = studentRepo.GetAllStudents();
+
+//studentService.OnRegistered += SendSms;
+//var student1 = studentService.Register("Mohsen");
 
 try
 {

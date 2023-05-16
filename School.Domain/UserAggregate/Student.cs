@@ -10,5 +10,7 @@ namespace School.Domain.UserAggregate
     public class Student : BaseEntity<int>
     {
         public string Name { get; set; }
+        public bool FinalExam { get; set; }
+        public int FinalExamScore { get; set; }
     }
 }

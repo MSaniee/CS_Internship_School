@@ -12,5 +12,9 @@ namespace School.Domain.UserAggregate
 
         bool ExistsStudent(string name);
         List<Student> GetAllStudents();
+        bool IsAllStudentsPassedFinalExam();
+        bool ExistsStudent(int id);
+        int CountStudentsPassedFinalExam();
+        Student GetBestStudent();
     }
 }

@@ -26,6 +26,26 @@ namespace School.Infrastructure.Repositories
             //Close Connection
         }
 
+        public bool IsAllStudentsPassedFinalExam()
+        {
+            return _db.All(s => s.FinalExam == true);
+        }
+
+        public Student GetBestStudent()
+        {
+            return _db.MaxBy(s => s.FinalExamScore);
+        }
+
+        public List<Student> GetStudentsByOrder()
+        {
+            return _db.OrderBy(s => s.Name).ToList();
+        }
+
+        public int CountStudentsPassedFinalExam()
+        {
+            return _db.Where(s => s.FinalExam).Count();
+        }
+
         public bool ExistsStudent(string name)
         {
             var result = _db.MyWhere(s => s.Name == name);
@@ -33,12 +53,7 @@ namespace School.Infrastructure.Repositories
             return result.Count != 0;
         }
 
-        public bool ExistsStudent(int id)
-        {
-            var result = _db.MyWhere(s => s.Name.Length == 0);
-
-            return result.Count != 0;
-        }
+        public bool ExistsStudent(int id) => _db.Any(s => s.Id == id);
 
 
         public Student GetById(int id)
