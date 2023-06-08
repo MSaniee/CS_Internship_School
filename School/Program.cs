@@ -1,79 +1,84 @@
 ﻿using School.Domain.UserAggregate;
+using School.Infrastructure.Repositories;
+using System.Xml.Linq;
+
+Student student = new("Mohsen");
+List<Student> db = new();
+IStudentRepository studentRepository = new StudentRepository(db);
+
+studentRepository.Add(student);
+
+Console.WriteLine("Hello...");
+//var task1 = GetDisciplineScore(student, 4);
+//var task2 = GetFinalExamScores(student);
+//var task3 = GetAccountantsApproval(student);
+
+//var tasks = new List<Task> { task1, task2, task3 };
+
+//while(tasks.Count > 0)
+//{
+//    Task finishedTask = await Task.WhenAny(tasks);
+
+//    if(finishedTask == task1)
+//    {
+//        Console.WriteLine("Discipline Score is ready");
+//    }
+//    else if (finishedTask == task2)
+//    {
+//        Console.WriteLine("Final Exam Scores are ready");
+//    }
+//    else if(finishedTask == task3)
+//    {
+//        Console.WriteLine("Accountants Approval is ready");
+//    }
+
+//    await finishedTask;
+
+//    tasks.Remove(finishedTask);
+//}
+
+
+//ReportCard reportCard = await GetReportCard(student);
+//Console.WriteLine($"{student.Name} is graduated :)");
 
 
 
-Student student = new() { Name = "Mohsen" };
 
-var task1 = GetDisciplineScore(student, 4);
-var task2 = GetFinalExamScores(student);
-var task3 = GetAccountantsApproval(student);
+//static async Task<ReportCard> GetReportCard(Student student)
+//{
+//    Console.WriteLine("Getting Report Card...");
+//    await Task.Delay(3000);
+//    Console.WriteLine("Report Card is got");
+//    return new ReportCard();
+//}
 
-var tasks = new List<Task> { task1, task2, task3 };
+//async Task GetAccountantsApproval(Student wood)
+//{
+//    Console.WriteLine("Geting Accountants Approval...");
+//    await Task.Delay(3000);
+//    Console.WriteLine("Accountants Approval is got");
+//}
 
-while(tasks.Count > 0)
-{
-    Task finishedTask = await Task.WhenAny(tasks);
+//async Task GetFinalExamScores(Student wood)
+//{
+//    Console.WriteLine("Getting the Final Exam Scores...");
+//    await Task.Delay(3000);
+//    Console.WriteLine("the Final Exam Scores is got");
+//}
 
-    if(finishedTask == task1)
-    {
-        Console.WriteLine("Discipline Score is ready");
-    }
-    else if (finishedTask == task2)
-    {
-        Console.WriteLine("Final Exam Scores are ready");
-    }
-    else if(finishedTask == task3)
-    {
-        Console.WriteLine("Accountants Approval is ready");
-    }
+//async Task GetDisciplineScore(Student student, int termNumber)
+//{
+//    Console.WriteLine("Getting the Discipline Score...");
+//    for (int i = 0; i < termNumber; i++)
+//    {
+//        await Task.Delay(1000);
+//    }
+//    Console.WriteLine("the Discipline Score is got");
+//}
 
-    await finishedTask;
+//// These classes are intentionally empty for the purpose of this example.
 
-    tasks.Remove(finishedTask);
-}
-
-
-ReportCard reportCard = await GetReportCard(student);
-Console.WriteLine($"{student.Name} is graduated :)");
-
-
-
-
-static async Task<ReportCard> GetReportCard(Student student)
-{
-    Console.WriteLine("Getting Report Card...");
-    await Task.Delay(3000);
-    Console.WriteLine("Report Card is got");
-    return new ReportCard();
-}
-
-async Task GetAccountantsApproval(Student wood)
-{
-    Console.WriteLine("Geting Accountants Approval...");
-    await Task.Delay(3000);
-    Console.WriteLine("Accountants Approval is got");
-}
-
-async Task GetFinalExamScores(Student wood)
-{
-    Console.WriteLine("Getting the Final Exam Scores...");
-    await Task.Delay(3000);
-    Console.WriteLine("the Final Exam Scores is got");
-}
-
-async Task GetDisciplineScore(Student student, int termNumber)
-{
-    Console.WriteLine("Getting the Discipline Score...");
-    for (int i = 0; i < termNumber; i++)
-    {
-        await Task.Delay(1000);
-    }
-    Console.WriteLine("the Discipline Score is got");
-}
-
-// These classes are intentionally empty for the purpose of this example.
-
-internal class ReportCard { }
+//internal class ReportCard { }
 
 
 //List<Student> db = new();

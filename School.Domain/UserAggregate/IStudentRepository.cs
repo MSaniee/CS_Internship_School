@@ -8,13 +8,13 @@ namespace School.Domain.UserAggregate
 {
     public interface IStudentRepository : IRepository<Student>
     {
-        Student GetById(int Id);
+        Student? GetById(int Id);
 
         bool ExistsStudent(string name);
         List<Student> GetAllStudents();
         bool IsAllStudentsPassedFinalExam();
         bool ExistsStudent(int id);
         int CountStudentsPassedFinalExam();
-        Student GetBestStudent();
+        Student? GetBestStudent();
     }
 }

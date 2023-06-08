@@ -10,16 +10,17 @@ namespace School.Infrastructure.Repositories
     public class StudentRepository : Repository<Student>, IStudentRepository, IDisposable
     {
         
-
         public StudentRepository(List<Student> db) : base(db)
         {
-
+            
         }
 
-        //public override void Add(Student entity)
-        //{
-        //    entity.Name += "Test";
-        //}
+        public override void Add(Student entity)
+        {
+            using ApplicationDbContext _dbContext = new();
+            _dbContext.Add(entity);
+            _dbContext.SaveChanges();
+        }
 
         public void Dispose()
         {
@@ -31,7 +32,7 @@ namespace School.Infrastructure.Repositories
             return _db.All(s => s.FinalExam == true);
         }
 
-        public Student GetBestStudent()
+        public Student? GetBestStudent()
         {
             return _db.MaxBy(s => s.FinalExamScore);
         }
@@ -56,7 +57,7 @@ namespace School.Infrastructure.Repositories
         public bool ExistsStudent(int id) => _db.Any(s => s.Id == id);
 
 
-        public Student GetById(int id)
+        public Student? GetById(int id)
         {
             return _db.FirstOrDefault(s => s.Id == id);
         }
