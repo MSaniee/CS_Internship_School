@@ -1,57 +1,127 @@
-﻿using School;
-using School.Application;
-using School.Application.Interfaces;
-using School.Application.Services;
-using School.Domain.UserAggregate;
-using School.Infrastructure.Repositories;
+﻿using School.Domain.UserAggregate;
 
 
-List<Student> db = new();
 
-db = SeedData.GetSeedData();
+Student student = new() { Name = "Mohsen" };
 
-IStudentRepository studentRepo = new StudentRepository(db);
-IStudentService studentService = new StudentService(studentRepo);
+var task1 = GetDisciplineScore(student, 4);
+var task2 = GetFinalExamScores(student);
+var task3 = GetAccountantsApproval(student);
+
+var tasks = new List<Task> { task1, task2, task3 };
+
+while(tasks.Count > 0)
+{
+    Task finishedTask = await Task.WhenAny(tasks);
+
+    if(finishedTask == task1)
+    {
+        Console.WriteLine("Discipline Score is ready");
+    }
+    else if (finishedTask == task2)
+    {
+        Console.WriteLine("Final Exam Scores are ready");
+    }
+    else if(finishedTask == task3)
+    {
+        Console.WriteLine("Accountants Approval is ready");
+    }
+
+    await finishedTask;
+
+    tasks.Remove(finishedTask);
+}
 
 
-bool boolTest1 = studentRepo.IsAllStudentsPassedFinalExam();
+ReportCard reportCard = await GetReportCard(student);
+Console.WriteLine($"{student.Name} is graduated :)");
 
-bool boolTest2 = studentRepo.ExistsStudent(6);
 
-int count1 = studentRepo.CountStudentsPassedFinalExam();
 
-Student bestStudent = studentRepo.GetBestStudent();
 
-var result = studentRepo.GetAllStudents();
+static async Task<ReportCard> GetReportCard(Student student)
+{
+    Console.WriteLine("Getting Report Card...");
+    await Task.Delay(3000);
+    Console.WriteLine("Report Card is got");
+    return new ReportCard();
+}
+
+async Task GetAccountantsApproval(Student wood)
+{
+    Console.WriteLine("Geting Accountants Approval...");
+    await Task.Delay(3000);
+    Console.WriteLine("Accountants Approval is got");
+}
+
+async Task GetFinalExamScores(Student wood)
+{
+    Console.WriteLine("Getting the Final Exam Scores...");
+    await Task.Delay(3000);
+    Console.WriteLine("the Final Exam Scores is got");
+}
+
+async Task GetDisciplineScore(Student student, int termNumber)
+{
+    Console.WriteLine("Getting the Discipline Score...");
+    for (int i = 0; i < termNumber; i++)
+    {
+        await Task.Delay(1000);
+    }
+    Console.WriteLine("the Discipline Score is got");
+}
+
+// These classes are intentionally empty for the purpose of this example.
+
+internal class ReportCard { }
+
+
+//List<Student> db = new();
+
+//db = SeedData.GetSeedData();
+
+//IStudentRepository studentRepo = new StudentRepository(db);
+//IStudentService studentService = new StudentService(studentRepo);
+
+
+//bool boolTest1 = studentRepo.IsAllStudentsPassedFinalExam();
+
+//bool boolTest2 = studentRepo.ExistsStudent(6);
+
+//int count1 = studentRepo.CountStudentsPassedFinalExam();
+
+//Student bestStudent = studentRepo.GetBestStudent();
+
+//var result = studentRepo.GetAllStudents();
 
 //studentService.OnRegistered += SendSms;
 //var student1 = studentService.Register("Mohsen");
 
-try
-{
-    Student student = studentService.GetById(10);
-}
-catch(NotFoundException ex) when (ex.Status == "Green")
-{
-    Console.WriteLine($"Stuednet Id : {ex.StudentId} {ex.Message}");
-}
-catch (Exception ex)
-{
-    Console.Write("Exception Is Handled...");
-}
+//try
+//{
+//    Student student = studentService.GetById(10);
+//}
+//catch(NotFoundException ex) when (ex.Status == "Green")
+//{
+//    Console.WriteLine($"Stuednet Id : {ex.StudentId} {ex.Message}");
+//}
+//catch (Exception ex)
+//{
+//    Console.Write("Exception Is Handled...");
+//}
 
 
-Console.WriteLine("Finish...");
+//Console.WriteLine("Finish...");
 
-bool CheckStudent(Student student)
-{
-    return true;
-}
+//bool CheckStudent(Student student)
+//{
+//    return true;
+//}
 
-void SendSms()
-{
-    Console.WriteLine("Send sms");
-}
+//void SendSms()
+//{
+//    Console.WriteLine("Send sms");
+//}
 
 //Forcing Garbage Collection In C#
 //CreateUsers();
